@@ -1,3 +1,5 @@
 public class HelloWord(){
-System.out.println("Hello Word!");
+   public static main(String[] args]){
+      System.out.println("Hello Word!");
+   }
 }
