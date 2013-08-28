@@ -42,9 +42,9 @@ public class Principal {
 			else
 				System.out.println("OPÇÃO INVALIDA!");			
 		}
-		System.out.println(travessia);//fica ou sai?
+		System.out.println(travessia);
 		System.out.println("Fim do Jogo!");
-		if(travessia.jogadorGanhou()==true)
+		if(travessia.jogadorGanhou())
 			System.out.println("Voce Ganhou!");
 		else
 			System.out.println("Voce Perdeu!");
