@@ -1,7 +1,10 @@
 package com.senac.jogos;
 
 public class TravessiaDeserto {
-
+/**
+ * Variaveis contantes
+ */
+	
 	public static final int MAP_SIZE = 10;
 	public static final int MAX_FUEL = 6;
 
@@ -20,18 +23,35 @@ public class TravessiaDeserto {
 	private int pos;
 	
 	
+	/**
+	 * Executa metodo que retorna a quantidade de combustivel
+	 */
 	public int getFuel(){
 		return fuel;
 	}
 	
+	/**
+	 * Executa metodo que retorna posicao 
+	 * 
+	 */
 	public int getPos(){
 		return pos;
 	}
 	
+	
+	/**
+	 * Metodo que retorn o valor armazenado na posicao do mapa
+	 * @param pos
+	 * @return 
+	 */
 	public int getPosMap(int pos){
 		return map[pos];
 	}
 	
+	/**
+	 * Metodo que retorna o mapa
+	 * @return
+	 */
 	public int[] getMapa(){
 		return map;
 	}
@@ -51,6 +71,10 @@ public class TravessiaDeserto {
 		System.out.println(getEndMessage());
 	}
 
+	/**
+	 * Exibe mensagem no fim do jogo
+	 * @return
+	 */
 	public String getEndMessage() {
 		if (isWinner())
 			return "Voce GANHOU!";
@@ -58,6 +82,9 @@ public class TravessiaDeserto {
 			return "Voce PERDEU.";
 	}
 
+	/**
+	 * Executa o metodo que testa se o jogo acabou
+	 */
 	public boolean isGameOver() {
 		if (isWinner())
 			return true;
@@ -66,15 +93,25 @@ public class TravessiaDeserto {
 		return false;
 	}
 
+	/**
+	 * Metodo que verifica se o jogador ganhou
+	 * @return
+	 */
 	public boolean isWinner() {
 		return pos == MAP_SIZE;
 	}
 
+	/**
+	 * Metodo que incia o jogo
+	 */
 	public void initGame() {
 		pos = 0;
 		fuel = MAX_FUEL;
 		map = new int[MAP_SIZE];
 	}
+	/**
+	 * Imprime a posicao, combustivel armazenado no mapa e combustivel no caminhao
+	 */
 
 	public void printStatus() {
 		System.out.println(String.format("Voce esta na posicao %d.", pos));
@@ -83,6 +120,11 @@ public class TravessiaDeserto {
 			System.out.println(String.format("Existem %d unidades de combustivel nessa posicao.", map[pos]));
 	}
 
+	/** 
+	 * Metodo que verifica o comando digitado
+	 * @param command
+	 * @return
+	 */
 	public int translateCommand(String command) {
 		String cmd = command.toLowerCase();
 		if (cmd.equals("avancar"))
@@ -98,6 +140,11 @@ public class TravessiaDeserto {
 		return ERROR;
 	}
 
+	
+	/**
+	 * Método que executa um metodo conforme a opcao digitada
+	 * @param command
+	 */
 	public void processCommand(int command) {
 		switch (command) {
 			case AVANCAR:
@@ -120,10 +167,16 @@ public class TravessiaDeserto {
 		}
 	}
 
+	/**
+	 * Exibe os comandos
+	 */
 	public void ajuda() {
 		System.out.println("Comandos: avancar voltar carregar descarregar ajuda");
 	}
 
+	/**
+	 * Metodo que descarrega uma unidade de combustivel
+	 */
 	public void descarregar() {
 		if (fuel > 0) {
 			fuel--;
@@ -131,6 +184,9 @@ public class TravessiaDeserto {
 		}
 	}
 
+	/**
+	 * Metodo que carrega uma unidade de combustivel
+	 */
 	public void carregar() {
 		if (map[pos] > 0) {
 			map[pos]--;
@@ -138,6 +194,9 @@ public class TravessiaDeserto {
 		}
 	}
 
+	/**
+	 * Metodo que volta uma posicao no mapa
+	 */
 	public void voltar() {
 		if (fuel > 0 && pos > 0) {
 			fuel--;
@@ -147,6 +206,9 @@ public class TravessiaDeserto {
 			fuel = MAX_FUEL;
 	}
 
+	/**
+	 * Metodo que avanca uma posicao no mapa
+	 */
 	public void avancar() {
 		if (fuel > 0) {
 			fuel--;

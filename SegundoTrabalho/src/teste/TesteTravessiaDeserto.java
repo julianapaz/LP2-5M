@@ -2,7 +2,6 @@ package teste;
 import static java.lang.System.*;
 import static org.junit.Assert.*;
 
-import java.io.ObjectInputStream.GetField;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -38,7 +37,7 @@ public class TesteTravessiaDeserto {
 	
 	@Test 
 	public void testInitGame(){
-		System.out.println("TESTE INITGAME");
+		out.println("TESTE INITGAME");
 		jogo.initGame();
 			
 		assertEquals("Testando combustivel", jogo.MAX_FUEL,jogo.getFuel(),0);
@@ -50,7 +49,7 @@ public class TesteTravessiaDeserto {
 	
 	@Test
 	public void testTranslateCommand(){
-		System.out.println("TESTE TRANSLATECOMMAND");
+		out.println("TESTE TRANSLATECOMMAND");
 		jogo.initGame();
 		String cmd = "avancar";
 		assertEquals("Testando retorno TRANSLATECOMMAND - AVANCAR",jogo.AVANCAR,jogo.translateCommand(cmd),0);
@@ -72,7 +71,7 @@ public class TesteTravessiaDeserto {
 	}
 	@Test	
 	public void testCarregar(){
-		System.out.println("TESTE CARREGAR");
+		out.println("TESTE CARREGAR");
 		//inicia o jogo
 		jogo.initGame();
 		
@@ -83,9 +82,6 @@ public class TesteTravessiaDeserto {
 		
 		
 		jogo.avancar();
-		//posicao 1 map[1]
-		//System.out.println("Avanca posicao "+jogo.getPos());
-		//System.out.println("Combustivel: "+jogo.getFuel());
 		
 		//verifica se tem combustivel armazenado na posicao atual
 		assertFalse(jogo.getPosMap(jogo.getPos())>0);
@@ -100,24 +96,26 @@ public class TesteTravessiaDeserto {
 		assertFalse(jogo.getPosMap(jogo.getPos())==combPosMapa+1);
 		
 				
-		//vai p posicao 0
+		//volta p posicao 0
 		jogo.voltar();
 		
 		//vai p posicao 1
 		jogo.avancar();
 		
 		combPosMapa = jogo.getPosMap(jogo.getPos());
-		//System.out.println(combPosMapa);
+		
 		//combustivel atual
 		int combustivel = jogo.getFuel();
 		//descarrega uma unidade na posicao 1
 		jogo.descarregar();
 		jogo.descarregar();
-		//System.out.println(jogo.getPosMap(jogo.getPos()));
+		
 		//verifica se combustivel é menor que o maximo de combustivel
 		assertTrue(jogo.getFuel()<jogo.MAX_FUEL);
+		
 		//verifica se na posicao 1 do mapa tem combustivel
 		assertTrue(jogo.getPosMap(jogo.getPos())>0);
+		
 		//executa o carregar
 		jogo.carregar();
 		
@@ -128,15 +126,9 @@ public class TesteTravessiaDeserto {
 		
 	}
 	
-	public void testProcessCommand(){
-		/*testInitGame();
-		String cmd = "avancar";
-		jogo.processCommand(jogo.translateCommand(cmd));*/
-	}
-
 	@Test
 	public void testAvancar() {
-		System.out.println("TESTE AVANCAR");
+		out.println("TESTE AVANCAR");
 		
 		jogo.initGame();
 		int combustivel = jogo.getFuel();
@@ -148,7 +140,7 @@ public class TesteTravessiaDeserto {
 		assertEquals("Incremento de posicao", posicao+1, jogo.getPos());
 		
 		
-		for(int i=0;i<combustivel;i++)
+		while(jogo.getFuel()>0)
 			jogo.avancar();
 		
 		posicao = jogo.getPos();
@@ -161,7 +153,7 @@ public class TesteTravessiaDeserto {
 	}
 	@Test 
 	public void testVoltar(){
-		System.out.println("TESTE VOLTAR");
+		out.println("TESTE VOLTAR");
 		jogo.initGame();
 		jogo.avancar();
 		jogo.avancar();
@@ -187,7 +179,7 @@ public class TesteTravessiaDeserto {
 	
 	@Test
 	public void testDescarregar(){
-		System.out.println("TESTE DESCARREGAR");
+		out.println("TESTE DESCARREGAR");
 		jogo.initGame();
 		
 		assertTrue(jogo.getFuel()>0);
@@ -215,7 +207,7 @@ public class TesteTravessiaDeserto {
 	@Test
 	public void testIsGameOver(){
 		jogo.initGame();
-		// perdendo o jogo.
+		// perdendo o jogo
 		while (jogo.getFuel() > 0)
 			jogo.avancar();
 		assertTrue(jogo.isGameOver());
@@ -271,7 +263,6 @@ public class TesteTravessiaDeserto {
 		//aaddvv
 		avancaDescarregaVolta();
 				
-		
 		///aacc
 		avancaDuploCarregaDuplo();
 		
