@@ -13,10 +13,11 @@ public class Planilha {
 
 		Scanner entradaTeclado = new Scanner(System.in);
 		String expressao="";
+		
 		while ( entradaTeclado.hasNext() )
 		{
 			expressao=entradaTeclado.nextLine();
-			if(expressao.equals("fim"))
+			if ( expressao.equals("fim") )
 				System.exit(0);
 			else
 				out.print(AvaliadorRPN.inversorPosFixo(expressao));
