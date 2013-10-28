@@ -20,7 +20,6 @@ public class Planilha {
 				System.exit(0);
 			else
 				out.print(AvaliadorRPN.inversorPosFixo(expressao));
-
 		}
 	}
 }
