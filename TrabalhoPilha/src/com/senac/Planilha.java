@@ -12,7 +12,7 @@ public class Planilha {
 		out.println( AvaliadorRPN.avalia("2 3 4 + *") );
 
 		Scanner entradaTeclado = new Scanner(System.in);
-		String expressao="( 20 * ( 5 + 4 ) )";
+		String expressao="";
 		while ( entradaTeclado.hasNext() )
 		{
 			expressao=entradaTeclado.nextLine();
