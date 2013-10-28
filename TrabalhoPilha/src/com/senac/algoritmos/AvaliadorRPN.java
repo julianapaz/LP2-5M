@@ -14,10 +14,15 @@ public class AvaliadorRPN {
 
 		Scanner sc = new Scanner(expressao);
 
-		while (sc.hasNext()) {
-			if (sc.hasNextInt()) {
+		while (sc.hasNext())
+		{
+			if (sc.hasNextInt())
+			{
 				pilha.push(sc.nextInt());
-			} else {
+			}
+			
+			else 
+			{
 				String op = sc.next();
 				double rhs = pilha.pop();
 				double lhs = pilha.pop();
@@ -46,25 +51,29 @@ public class AvaliadorRPN {
 			{
 				String opLido = entrada.next();
 
-				if	( ehFechaParentes(opLido) ){
-					do{
+				if ( ehFechaParentes(opLido) )
+				{
+					while ( !ehAbreParenteses(pilha.peek()) )
+					{
 
 						saida += " " + pilha.pop();
 
-					}while( !ehAbreParenteses(pilha.peek()) );
+					}
 					
 					pilha.pop();
 				}
 
 				else 
 				{				
-					if	( pilha.isEmpty() || ehAbreParenteses(pilha.peek()) )
+					if ( pilha.isEmpty() )
 					{		
 						pilha.push(opLido);
 					}
 
 					else if ( prioridade(opLido)>prioridade(pilha.peek()) )
+					{
 						pilha.push(opLido);
+					}
 
 					else				
 					{
@@ -96,33 +105,27 @@ public class AvaliadorRPN {
 	}
 
 	public static int prioridade(String operador) throws InvalidOperator {
-		int precedencia = 0;
+
 		switch (operador.charAt(0)) {
 		case '(':
-			precedencia = 3;
-			break;
+			return 3;
 
 		case '*':
-			precedencia = 2;
-			break;
-
+			return 2;
+			
 		case '/':
-			precedencia = 2;
-			break;
-
+			return 2;
+			
 		case '+':
-			precedencia = 1;
-			break;
-
+			return 1
+			
 		case '-':
-			precedencia = 1;
-			break;
-
+			return 1
+			
 		default:
 			throw new InvalidOperator(operador.charAt(0));
 		}
 
-		return precedencia;
 	}
 
 	private static double executaOperador(char op, double lhs, double rhs)
