@@ -117,10 +117,10 @@ public class AvaliadorRPN {
 			return 2;
 			
 		case '+':
-			return 1
+			return 1;
 			
 		case '-':
-			return 1
+			return 1;
 			
 		default:
 			throw new InvalidOperator(operador.charAt(0));
