@@ -77,7 +77,7 @@ public class AvaliadorRPN {
 
 					else				
 					{
-						while	( !pilha.isEmpty() && prioridade(opLido)<prioridade(pilha.peek()) && !ehAbreParenteses(pilha.peek()) )
+						while ( !pilha.isEmpty() && prioridade(opLido)<prioridade(pilha.peek()) && !ehAbreParenteses(pilha.peek()) )
 						{
 							saida +=" "+pilha.pop();
 						}
@@ -87,7 +87,7 @@ public class AvaliadorRPN {
 				}
 			}
 		}
-		while	( !pilha.isEmpty() )
+		while ( !pilha.isEmpty() )
 		{
 			saida += " "+pilha.pop();
 		}	
