@@ -10,13 +10,18 @@ import java.util.Scanner;
 public class Labirinto {
 	
 	private static final Scanner teclado = new Scanner(System.in);
+	private static final int TOTALCHAVEAMARELA = 6;
+	private static final int TOTALCHAVEAZUL = 6;
+	private static final int TOTALCHAVEVERDE = 6;
+	private static final int TOTALCHAVEVEMEOLHA = 6;
 	
 	private Sala[] salas;
 	private int countSalas;
 	private int salaAtual;
+	protected Jogador jogador;
 	
 	
-	//armadilha?????
+	
 		
 	private void run()
 	{
@@ -55,6 +60,19 @@ public class Labirinto {
 		}
 		Random r = new Random();
 		salaAtual = 1+r.nextInt(30);
+		/*
+		*APOS INICIALIZAR AS 31 SALAS
+		*ADICIONAR AS 24 CHAVES, ENTRE ELAS 6 CORES DE CADA, DISTRIBUIDAS PELAS 31 SALAS
+		* ONDE 24 PORTAS TERAO CHAVES E 7 NENHUMA OU UMA SALA PODE TER MAIS DE UMA CHAVE? 
+		* SERA REALIZADO UM SORTEIO ENTRE 1 E 31(NUMERO MAX DE SALAS)
+		* INSERIR EM CADA SALA[INDICESORTEADO] O NR DE CHAVES DE CADA COR
+		* TER UM TOTAL DE CADA CHAVE - UM VALOR ESTATICO
+		* CRIAR UM METODO QUE ADICIONA CHAVES RECEBENDO COMO PARAMENTO A COR DA CHAVE E O NR DE CHAVES
+		* METODO ADICIONACHAVE(COR cor, TOTALCHAVEcor)
+		* DENTRO DESTE METODO EH REALIZADO 6 SORTEIOS DE INDICES QUE RECEBERAM A CHAVE DA COR
+		* POREM O SORTEIO DE INDICES PODE REPETIR E A MESMA SALA RECEBER A MESMA OU UMA NOVA COR
+		* POSSIVELMENTE NAO TERA EXATAMENTE 24 CHAVES ESPALHADAS PELO LABIRINTO
+		*/
 	}
 	
 	private void leLabirinto( Scanner arquivo ) throws Exception
@@ -96,7 +114,8 @@ public class Labirinto {
 	public boolean isGameOver()
 	{
 		//jogador sem vida
-		//salaAtual é a de nr 0		
+		//salaAtual eh a de nr 0
+		//se o jogador nao possuir nenhuma chave da mesma cor de nenhuma porta das direcoes
 		return false;
 	}
 	
@@ -117,26 +136,30 @@ public class Labirinto {
 			/*ler o "proximo" - direcao
 			 *chama o metodo que troca de sala enviando como parametro a direcao
 			 *Metodo trocaSala: troca de sala para a direcao indicada
-			 *descobrir o nr da sala, salaAtual passará a ser este nr
+			 *descobrir o nr da sala, se eh possivelAtravesar, salaAtual passar ser este nr
 			 */
 			
 			//trocaSala(direcao);
 		}
 		
 		if ( cmd.equals("olhar") )
-		{
+		{	
+			//leitura do "proximo"
 			//mostra armadilha no nr da sala na direcao indicada
 			System.out.println("olhar");
 		}
 		
 		if( cmd.equals("atacar") )
 		{
-			//Combate(jogador,inimigo)
+			//Combate()
 			System.out.println("atacar");
 		}
 		
 		if( cmd.equals("pegar") )
 		{
+			//leitura do "proximo"
+			//verificar o item que o jogador deseja pegar
+			
 			//jogador.get....
 		
 			System.out.println("pegar");
@@ -144,9 +167,11 @@ public class Labirinto {
 		
 		if( cmd.equals("largar") )
 		{
+			/* ler o "proximo" do scanner que sera o item
 			//chave
 			//arma
 			//armadura		
+			//jogador.setITEM(null);
 		}
 		
 	}
@@ -157,18 +182,27 @@ public class Labirinto {
 		 * percorrer o arquivo/mapa ate encontrar o nr da salaAtual
 		 * 		percorrer a linha ate encontrar a direcao
 		 * 			encontrar o nr da sala
-		 * 	salaAtual sera o nr da sala da direcao informada
+		 *		se a chave do jogador eh a mesma cor da "porta"/conexao
+		 * 			salaAtual sera o nr da sala da direcao informada
+		 *		senao
+		 *		informa ao jogador
 		 * 
 		 */
 		
 	}
 	
 	/*
-	 * combate (jogador,inimigo)
+	 * combate ()
 	 *
-	 *	enquanto(jogador.isAlive e inimigo.isAlive)
-	 *		sorteia = Range.getPercentual();
-	 *		se (
+	 *	DUVIDA - EXECUTA O COMBATE SOMENTE QUANDO O JOGADOR EXECUTA ATACAR
+	 *	OU PERMANECE NO METODO ATE JOGADOR OU O MONSTRO SEM VIDA
+	 *	sorteia um numero inteiro entre 0-1 e 100 - int nrSorteado = Range.getPercentual();
+	 *	se o nrSorteado for menor ou igual a 80
+	 *		jogador acerta o golpe no inimigo - inimigo.setDano(jogador.getAtaque);
+	 *	se o inimigo estiver vivo - inimigo.isAlive
+	 *		sorteia um numero inteiro entre 0 1 e 100
+	 *		se o nr sorteado for menor ou igual que 60
+	 *			inimigo acerta o golpe no jogador - jogador.setDano(inimigo.getAtaque)
 	 *}
 	 */
 	
