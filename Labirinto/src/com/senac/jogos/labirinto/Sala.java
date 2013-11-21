@@ -3,7 +3,7 @@ package com.senac.jogos.labirinto;
 public class Sala {
 
 	Conexao[] conexoes = new Conexao[6];
-	Chave chave;
+	private Chave chave;
 	
 	
 	public void setChave(Cor cor){
@@ -44,5 +44,4 @@ public class Sala {
 		}
 		
 	}
-	
 }
