@@ -142,6 +142,8 @@ public class Labirinto {
 			 */
 			
 			//trocaSala(direcao);
+			direcao = leitura.next();
+			move(direcao);
 		}
 		
 		if ( cmd.equals("olhar") )
@@ -149,12 +151,16 @@ public class Labirinto {
 			//leitura do "proximo"
 			//mostra armadilha no nr da sala na direcao indicada
 			System.out.println("olhar");
+			direcao = leitura.next();
+			salas[salaAtual].conexoes[salas[salaAtual].getDirecaoIndex(direcao)].getArmadilha();
 		}
 		
 		if( cmd.equals("atacar") )
 		{
 			//Combate()
 			System.out.println("atacar");
+			direcao = leitura.next();
+			combate(direcao);
 		}
 		
 		if( cmd.equals("pegar") )
@@ -169,44 +175,37 @@ public class Labirinto {
 		
 		if( cmd.equals("largar") )
 		{
-			/* ler o "proximo" do scanner que sera o item
+			//ler o "proximo" do scanner que sera o item
 			//chave
 			//arma
 			//armadura		
 			//jogador.setITEM(null);
 		}
 		
+	 
+	public void move(String direcao) throws Exception{
+		if( salas[salaAtual].conexoes[salas[salaAtual].getDirecaoIndex(direcao)].canAtravessar(jogador))
+			salaAtual = salas[salaAtual].conexoes[salas[salaAtual].getDirecaoIndex(direcao)].getSala();
+		else
+			System.out.println("Voce não possui a chave que abre esta porta!");
+	
 	}
 	
-	public void trocaSala(String direcao){
-		/*
-		 * metodo que recebe como paramentro a direcao da proxima sala
-		 * percorrer o arquivo/mapa ate encontrar o nr da salaAtual
-		 * 		percorrer a linha ate encontrar a direcao
-		 * 			encontrar o nr da sala
-		 *		se a chave do jogador eh a mesma cor da "porta"/conexao
-		 * 			salaAtual sera o nr da sala da direcao informada
-		 *		senao
-		 *		informa ao jogador
-		 * 
-		 */
+	public void combate(String direcao) throws Exception{
+		int nrSorteado = Range.getPercentual();
+		if ( nrSorteado<=80 )
+			salas[salaAtual].conexoes[salas[salaAtual].getDirecaoIndex(direcao)].inimigo.setDano(jogador.getAtaque());
+		if ( salas[salaAtual].conexoes[salas[salaAtual].getDirecaoIndex(direcao)].inimigo.isAlive() )
+		{
+			nrSorteado = Range.getPercentual();
+			if ( nrSorteado<=60)
+				jogador.setDano(salas[salaAtual].conexoes[salas[salaAtual].getDirecaoIndex(direcao)].inimigo.ataque);	
+		}
+		
+		
+		
 		
 	}
-	
-	/*
-	 * combate ()
-	 *
-	 *	DUVIDA - EXECUTA O COMBATE SOMENTE QUANDO O JOGADOR EXECUTA ATACAR
-	 *	OU PERMANECE NO METODO ATE JOGADOR OU O MONSTRO SEM VIDA
-	 *	sorteia um numero inteiro entre 0-1 e 100 - int nrSorteado = Range.getPercentual();
-	 *	se o nrSorteado for menor ou igual a 80
-	 *		jogador acerta o golpe no inimigo - inimigo.setDano(jogador.getAtaque);
-	 *	se o inimigo estiver vivo - inimigo.isAlive
-	 *		sorteia um numero inteiro entre 0 1 e 100
-	 *		se o nr sorteado for menor ou igual que 60
-	 *			inimigo acerta o golpe no jogador - jogador.setDano(inimigo.getAtaque)
-	 *}
-	 */
 	
 	public static void main(String[] args)
 	{
