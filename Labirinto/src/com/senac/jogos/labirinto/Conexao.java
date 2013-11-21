@@ -2,7 +2,7 @@ package com.senac.jogos.labirinto;
 
 public class Conexao {
 	private int sala;
-	private Inimigo inimigo;
+	protected Inimigo inimigo;
 	private Cor cor;
 	
 		
