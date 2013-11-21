@@ -2,7 +2,13 @@ package com.senac.jogos.labirinto;
 
 public class Sala {
 
-	Conexao[] conexoes = new Conexao[6];//pq 6?
+	Conexao[] conexoes = new Conexao[6];
+	Chave chave;
+	
+	
+	public void setChave(Cor cor){
+		this.chave = new Chave(cor);
+	}
 	
 	private static int getDirecaoIndex(String direcao) throws Exception
 	{
